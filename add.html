@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <style>
+label{
+font-size: 30px;
+position: absolute;
+left:50px;
+}
+input{
+background-color: Bisque; 
+font-size: 20px; 
+border-radius: 5px; 
+padding: 20px;
+position: relative;
+}
+    </style>
+<head>
+<title>Page Title</title>
+</head>
+<body style="font-family:sans-serif;background-color:Bisque;">
+
+<h2 style="position: absolute; top: 0px; right: 250px;">
+<a style="color:Black; "href= "about.html">About</a></h2>
+
+<h2 style="position: absolute; top: 0px; right: 180px;">
+<a style="color:Black; "href= "add.html">Add</a></h2>
+
+<h2 style="position: absolute; top: 0px; right: 70px;">
+<a style="color:Black; "href= "search.html">Search</a></h2>
+
+<h3 style="color:Peru;">Guitar Inventory<br> Management</br></h1>
+<label style="top: 150px;"><b>Serial Number: </b><input size= "50;"
+, id= "number"></label>
+<br>
+<br>
+<label style="top: 250px;"><b>Price: </b><input style="left: 130px;", size= "50;", id= "price"></label>
+<br>
+<br>
+<label style="top: 350px;"><b>Builder: </b><input style="left: 100px;", size= "50;", id= "builder"></label>
+<br>
+<br>
+<label style="top: 450px;"><b>Model: </b><input style="left: 115px;", size= "50;", id= "model"></label>
+<br>
+<br>
+<label style="top: 550px;"><b>Type: </b><input style="left: 135px;", size= "50;", id= "type"></label>
+<br>
+<br>
+<label style="top: 650px;"><b>BackWood: </b><input style="left: 48px;", size= "50;", id= "backWood"></label>
+<br>
+<br>
+<label style="top: 750px;"><b>TopWood: </b><input style="left: 65px;", size= "50;", id= "topWood"></label>
+<br>
+<br>
+<button onclick="add()"style="border-color: BurlyWood; background-color: BurlyWood;font-size: 30px; font-weight: bold;position: absolute; left: 400px; top: 850px; border-radius: 10px; padding: 10px 30px;">  Add the Guitar  </button>
+</body>
+<script>
+    function add(){
+        let guitarID = document.getElementById("number").value;
+        let guitarPrice = document.getElementById("price").value;
+        let guitarBuilder = document.getElementById("builder").value;
+        let guitarModel = document.getElementById("model").value;
+        let guitarType = document.getElementById("type").value;
+        let guitarBackWood = document.getElementById("backWood").value;
+        let guitarTopWood = document.getElementById("topWood").value;
+
+        let guitar = {serial_number: guitarID, price: guitarPrice, builder: guitarBuilder, model: guitarModel, type: guitarType, backWood: guitarBackWood, topWood: guitarTopWood};
+
+        alert("You entered: " + JSON.stringify(guitar))
+    }
+</script>
+</html>
