@@ -142,12 +142,10 @@ top: 0px;
             builder: "Charles", model: "1823", 
             type: "Acoustic", backWood: "Birch", 
             topWood: "Birch"}];
+            
             function search(){
-            let rowNum = $("#searchResult").children("tr");
-            for(let i = 0; i < rowNum; i++){
-            document.getElementById("searchResult").deleteRow(0);
-            }
                 let table = document.getElementById("searchResult");
+                table.innerHTML = "";
                 let guitarBuilder = document.getElementById("builder").value;
                 let guitarModel = document.getElementById("model").value;
                 let guitarType = document.getElementById("type").value;
