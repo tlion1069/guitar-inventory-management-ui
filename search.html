@@ -117,83 +117,75 @@ top: 0px;
             </tbody>
     </table>
 <script>
-    let guitars =[
-        {serial_number: 1, price: 9.99, 
-            builder: "Yamaha", model: "2008", 
-            type: "Acoustic", backWood: "Maple", 
-            topWood: "Maple"},
+    let guitars =[];
+    
+    async function getAll(){
+       let host = "http://localhost:8080";
+       let request = {
+        method: "GET"
+       };
+       let response = await fetch(host + "/", request);
+       if(response.status == 200){
+          return await response.json();
+        } else{
+          console.log(response);
+          message = "Could not get list of guitar";
+        } 
 
-            {serial_number: 2, price: 99.99, 
-            builder: "Charles", model: "1802", 
-            type: "Electric", backWood: "Aluminum", 
-            topWood: "Bone"},
-
-            {serial_number: 3, price: 1.99, 
-            builder: "Charles", model: "2032", 
-            type: "Acoustic", backWood: "Birch", 
-            topWood: "Maple"},
-
-            {serial_number: 4, price: 39.99, 
-            builder: "Yamaha", model: "2008", 
-            type: "Electric", backWood: "Maple", 
-            topWood: "Birch"},
-
-            {serial_number: 5, price: "59.99", 
-            builder: "Charles", model: "1823", 
-            type: "Acoustic", backWood: "Birch", 
-            topWood: "Birch"}];
-            
-            function search(){
-                let table = document.getElementById("searchResult");
-                table.innerHTML = "";
-                let guitarBuilder = document.getElementById("builder").value;
-                let guitarModel = document.getElementById("model").value;
-                let guitarType = document.getElementById("type").value;
-                let guitarBackWood = document.getElementById("backWood").value;
-                let guitarTopWood = document.getElementById("topWood").value;
-                for(guitar of guitars){
-                    if(!guitarBuilder || guitarBuilder.toLowerCase() == guitar.builder.toLowerCase()){
-                        if(!guitarModel || guitarModel.toLowerCase() == guitar.model.toLowerCase()){
-                            if(!guitarType || guitarType.toLowerCase() == guitar.type.toLowerCase()){
-                                if(!guitarBackWood || guitarBackWood.toLowerCase() == guitar.backWood.toLowerCase()){
-                                    if(!guitarTopWood || guitarTopWood.toLowerCase() == guitar.topWood.toLowerCase()){
-                                        let row = document.createElement("tr");
-                                        let id = document.createTextNode(guitar.serial_number);
-                                        let price = document.createTextNode(guitar.price);
-                                        let builder = document.createTextNode(guitar.builder);
-                                        let model = document.createTextNode(guitar.model);
-                                        let type = document.createTextNode(guitar.type);
-                                        let bw = document.createTextNode(guitar.backWood);
-                                        let tw = document.createTextNode(guitar.topWood);
-                                        let cell1 = document.createElement("td");
-                                        let cell2 = document.createElement("td");
-                                        let cell3 = document.createElement("td");
-                                        let cell4 = document.createElement("td");
-                                        let cell5 = document.createElement("td");
-                                        let cell6 = document.createElement("td");
-                                        let cell7 = document.createElement("td");
-                                        cell1.appendChild(id);
-                                        cell2.appendChild(builder);
-                                        cell3.appendChild(model);
-                                        cell4.appendChild(type);
-                                        cell5.appendChild(bw);
-                                        cell6.appendChild(tw);
-                                        cell7.appendChild(price);
-                                        row.appendChild(cell1);
-                                        row.appendChild(cell2);
-                                        row.appendChild(cell3);
-                                        row.appendChild(cell4);
-                                        row.appendChild(cell5);
-                                        row.appendChild(cell6);
-                                        row.appendChild(cell7);
-                                        table.appendChild(row);
-                                    }
-                                }
+    async function search(){
+        if(ducks.length == 0){
+            guitars = await getAll();
+        }
+        let table = document.getElementById("searchResult");
+        table.innerHTML = "";
+        let guitarBuilder = document.getElementById("builder").value;
+        let guitarModel = document.getElementById("model").value;
+        let guitarType = document.getElementById("type").value;
+        let guitarBackWood = document.getElementById("backWood").value;
+        let guitarTopWood = document.getElementById("topWood").value;
+        for(guitar of guitars){
+            if(!guitarBuilder || guitarBuilder.toLowerCase() == guitar.builder.toLowerCase()){
+                if(!guitarModel || guitarModel.toLowerCase() == guitar.model.toLowerCase()){
+                    if(!guitarType || guitarType.toLowerCase() == guitar.type.toLowerCase()){
+                        if(!guitarBackWood || guitarBackWood.toLowerCase() == guitar.backWood.toLowerCase()){
+                            if(!guitarTopWood || guitarTopWood.toLowerCase() == guitar.topWood.toLowerCase()){
+                                let row = document.createElement("tr");
+                                let id = document.createTextNode(guitar.serial_number);
+                                let price = document.createTextNode(guitar.price);
+                                let builder = document.createTextNode(guitar.builder);
+                                let model = document.createTextNode(guitar.model);
+                                let type = document.createTextNode(guitar.type);
+                                let bw = document.createTextNode(guitar.backWood);
+                                let tw = document.createTextNode(guitar.topWood);
+                                let cell1 = document.createElement("td");
+                                let cell2 = document.createElement("td");
+                                let cell3 = document.createElement("td");
+                                let cell4 = document.createElement("td");
+                                let cell5 = document.createElement("td");
+                                let cell6 = document.createElement("td");
+                                let cell7 = document.createElement("td");
+                                cell1.appendChild(id);
+                                cell2.appendChild(builder);
+                                cell3.appendChild(model);
+                                cell4.appendChild(type);
+                                cell5.appendChild(bw);
+                                cell6.appendChild(tw);
+                                cell7.appendChild(price);
+                                row.appendChild(cell1);
+                                row.appendChild(cell2);
+                                row.appendChild(cell3);
+                                row.appendChild(cell4);
+                                row.appendChild(cell5);
+                                row.appendChild(cell6);
+                                row.appendChild(cell7);
+                                table.appendChild(row);
                             }
                         }
                     }
                 }
             }
+        }
+    }
 
 </script>
 </body>

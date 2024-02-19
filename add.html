@@ -54,7 +54,9 @@ position: relative;
 <button onclick="add()"style="border-color: BurlyWood; background-color: BurlyWood;font-size: 30px; font-weight: bold;position: absolute; left: 400px; top: 850px; border-radius: 10px; padding: 10px 30px;">  Add the Guitar  </button>
 </body>
 <script>
-    function add(){
+    async function add(){
+        let missing = false;
+        let host = "http://localhost:8080"
         let guitarID = document.getElementById("number").value;
         let guitarPrice = document.getElementById("price").value;
         let guitarBuilder = document.getElementById("builder").value;
@@ -62,10 +64,61 @@ position: relative;
         let guitarType = document.getElementById("type").value;
         let guitarBackWood = document.getElementById("backWood").value;
         let guitarTopWood = document.getElementById("topWood").value;
-
-        let guitar = {serial_number: guitarID, price: guitarPrice, builder: guitarBuilder, model: guitarModel, type: guitarType, backWood: guitarBackWood, topWood: guitarTopWood};
-
-        alert("You entered: " + JSON.stringify(guitar))
+        if(!guitarID){
+            alert("Please enter a value for the guitar ID.");
+            missing = true;
+        }
+        if(!guitarPrice){
+            alert("Please enter a value for the guitar Price.");
+            missing = true;
+        }
+        if(!guitarBackWood){
+            alert("Please enter a value for the guitar Back Wood.");
+            missing = true;
+        }
+        if(!guitarBuilder){
+            alert("Please enter a value for the guitar Builder.");
+            missing = true;
+        }
+        if(!guitarModel){
+            alert("Please enter a value for the guitar Model.");
+            missing = true;
+        }
+        if(!guitarType){
+            alert("Please enter a value for the guitar Type.");
+            missing = true;
+        }
+        if(!guitarTopWood){
+            alert("Please enter a value for the guitar Top Wood.");
+            missing = true;
+        }
+        if(!missing){
+        let guitar = {
+            serial_number: guitarID, 
+            price: guitarPrice, 
+            builder: guitarBuilder, 
+            model: guitarModel, 
+            type: guitarType, 
+            backWood: guitarBackWood, 
+            topWood: guitarTopWood};
+        }
+        let request = {
+            method: "POST",
+            headers:{
+            "Content-Type": "application/json"
+            },
+            body: JSON.stringify(guitar)
+        }
+        let response = await fetch(host + "/add", request);
+        let message = "";
+        if(response.status == 200){
+          message = "The guitar was added to the system!";
+        }
+        else {
+        message = "Something went wrong. Please try again or contact the customer support team.";
+        }
+        console.log(result);
+        
     }
 </script>
 </html>
